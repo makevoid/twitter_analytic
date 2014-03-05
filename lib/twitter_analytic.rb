@@ -22,11 +22,12 @@ class TwitterAnalytic
   end
 
   def str_format
-    out  = "Hashtags:"
+    out  = "Hashtags:\n"
     out << @results[:hashtags].map{ |tag, count| "#{tag}: #{count}" }.join("\n")
-    out << "-" * 80
-    out << "Mentions:"
+    out << "\n#{"-" * 80}\n"
+    out << "Mentions:\n"
     out << @results[:mentions].map{ |usr, count| "#{usr}: #{count}" }.join("\n")
+    out << "\n"
     out
   end
 
