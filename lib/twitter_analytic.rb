@@ -1,3 +1,6 @@
+path = File.expand_path "../../", __FILE__
+require "#{path}/config/env.rb"
+
 class TwitterAnalytic
 
   def self.analyze(user)
