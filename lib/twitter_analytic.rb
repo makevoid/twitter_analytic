@@ -3,6 +3,8 @@ require "#{path}/config/env.rb"
 
 class TwitterAnalytic
 
+  include Caching
+
   def self.analyze(user)
     new(user).analyze
   end
@@ -13,7 +15,16 @@ class TwitterAnalytic
 
   def analyze
     puts "do stuff"
+    @tweets = load_tweets
     "stuff"
+  end
+
+  def load_tweets
+    unless cache_present?(@user)
+      cache_save @user, TWI.user_timeline(@user, count: 200).map{ |tweet| tweet.text }
+    else
+      cache_load @user
+    end
   end
 
 end

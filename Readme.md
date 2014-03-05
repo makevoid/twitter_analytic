@@ -22,6 +22,17 @@ then:
 
 (use bundle exec if rspec alone doesn't resolves)
 
+
+### Running the console
+
+    irb -r ./config/env.rb
+
+then for example:
+
+    ta = TwitterAnalytic.new "rails"
+    ta.analyze
+
+
 ### Specifications:
 
   receives twitter account name as argument
@@ -35,6 +46,8 @@ then:
 
 ### notes
 
-Tests need internet connection
+Tests need internet connection (the first time, before the cache is populated)
 
 I could have used require_relative but require + File.expand_path is my favourite method
+
+I'm not testing the cache code as it may be out of this trial scope
