@@ -21,6 +21,8 @@ class TwitterAnalytic
     str_format
   end
 
+  private
+
   def str_format
     out  = "Hashtags:\n"
     out << @results[:hashtags].map{ |tag, count| "#{tag}: #{count}" }.join("\n")
@@ -33,6 +35,8 @@ class TwitterAnalytic
 
   def do_analysis
     results = @results_raw.join " "
+
+    # note: this method can be refactored
 
     hashes = results.scan(/#\w+/).uniq
     ments  = results.scan(/@\w+/).uniq
