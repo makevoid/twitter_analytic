@@ -3,6 +3,8 @@ require "#{path}/config/env.rb"
 
 class TwitterAnalytic
 
+  attr_reader :results, :results_raw
+
   include Caching
 
   def self.analyze(user)
@@ -14,7 +16,43 @@ class TwitterAnalytic
   end
 
   def analyze
-    load_tweets
+    @results_raw = load_tweets
+    @results = do_analysis
+    str_format
+  end
+
+  def str_format
+    out  = "Hashtags:"
+    out << @results[:hashtags].map{ |tag, count| "#{tag}: #{count}" }.join("\n")
+    out << "-" * 80
+    out << "Mentions:"
+    out << @results[:mentions].map{ |usr, count| "#{usr}: #{count}" }.join("\n")
+    out
+  end
+
+  def do_analysis
+    results = @results_raw.join " "
+
+    hashes = results.scan(/#\w+/).uniq
+    ments  = results.scan(/@\w+/).uniq
+
+    hashtags = {}
+    hashes.each do |hash|
+      scan = results.scan(hash)
+      hashtags[hash] = scan.count
+    end
+
+    mentions = {}
+    ments.each do |ment|
+      scan = results.scan(ment)
+      mentions[ment] = scan.count
+    end
+
+    { hashtags: sort(hashtags), mentions: sort(mentions) }
+  end
+
+  def sort(hash)
+    hash.sort_by { |key, count| -count }
   end
 
   def load_tweets

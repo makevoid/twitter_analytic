@@ -22,6 +22,13 @@ then:
 
 (use bundle exec if rspec alone doesn't resolves)
 
+### Delete cache files
+
+run:
+
+    ruby lib/tasks/delete_cache.rb
+
+to delete cache files
 
 ### Running the console
 
@@ -34,6 +41,17 @@ then for example:
     ta.analyze
 
 
+### notes:
+
+Tests need internet connection (the first time, before the cache is populated)
+
+I could have used require_relative but require + File.expand_path is my favourite method
+
+I implemented caching as it speeds up the development process, especially when test-driven
+
+I'm not testing the cache code as it may be out of this trial scope
+
+
 ### Specifications:
 
   receives twitter account name as argument
@@ -43,12 +61,3 @@ then for example:
 
   returns a list of hashtags (#rails) and mentions (@rails) used in the latest 200 tweets posted from the account
   (ordered from most more appearances to less appearances)
-
-
-### notes
-
-Tests need internet connection (the first time, before the cache is populated)
-
-I could have used require_relative but require + File.expand_path is my favourite method
-
-I'm not testing the cache code as it may be out of this trial scope

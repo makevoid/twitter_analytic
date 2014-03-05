@@ -17,6 +17,7 @@ module Caching
     File.open( CACHE_FILE % key, "w" ) do |file|
       file.write contents.to_json
     end
+    contents
   end
 
 end
