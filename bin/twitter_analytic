@@ -1,0 +1,7 @@
+#! /usr/bin/env ruby
+path = File.expand_path "../../", __FILE__
+
+raise ArgumentError, "Please pass a twitter username as an argument" unless ARGV[0]
+
+require "#{path}/lib/twitter_analytic"
+TwitterAnalytic.analyze ARGV[0]
