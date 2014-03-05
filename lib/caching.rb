@@ -14,7 +14,7 @@ module Caching
   end
 
   def cache_save(key, contents)
-    File.open( CACHE_FILE % key, ) do |file|
+    File.open( CACHE_FILE % key, "w" ) do |file|
       file.write contents.to_json
     end
   end

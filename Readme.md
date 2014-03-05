@@ -26,6 +26,7 @@ then:
 ### Running the console
 
     irb -r ./config/env.rb
+    require "#{PATH}/lib/twitter_analytic"
 
 then for example:
 
