@@ -10,6 +10,7 @@ class TwitterAnalytic
 
   def analyze
     puts "do stuff"
+    "stuff"
   end
 
 end
